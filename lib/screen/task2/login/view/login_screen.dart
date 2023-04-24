@@ -30,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      controller: loginProviderf!.txtemail ,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderSide:
@@ -45,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 10,),
                     TextField(
+                      controller: loginProviderf!.txtpass,
                       decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                               borderSide:
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 10,),
                     InkWell(
                       onTap: () {
-                        loginProviderf!.singup();
+                        loginProviderf!.singup(loginProviderf!.txtemail.text,loginProviderf!.txtpass.text);
                         loginProviderf!.txtpass.clear();
                         loginProviderf!.txtemail.clear();
                       },
@@ -89,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                controller: loginProviderf!.txtemail,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -104,6 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 10,),
               TextField(
+                controller: loginProviderf!.txtpass,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -121,13 +125,17 @@ class _LoginScreenState extends State<LoginScreen> {
               InkWell(
                 onTap: () {
                   loginProviderf!.read();
+                  print(loginProviderf!.email);
+                  print(loginProviderf!.pass);
+                  print(loginProviderf!.txtemail.text);
+                  print(loginProviderf!.txtpass.text);
                   if(loginProviderf!.email==loginProviderf!.txtemail&&loginProviderf!.pass==loginProviderf!.txtpass)
                     {
-                      Navigator.pushReplacementNamed(context, 'task2');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Wrong id & pass....")));
                     }
                   else
                     {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Wrong id & pass....")));
+                      Navigator.pushReplacementNamed(context, 'task2');
                     }
                 },
                 child: Container(
